@@ -1,0 +1,118 @@
+﻿<link rel="stylesheet" href="~/css/style.css" />
+
+<div class="navbar">
+    <a href="/">Home</a>
+    <a href="/Home/Books">Books</a>
+    <a href="/Home/IssueBook">Issue Book</a>
+    <a href="/Home/Contact">Contact</a>
+    <a href="/Home/About">About</a>
+</div>
+
+<div class="container">
+
+    <h1>Issue Book</h1>
+
+    <input type="text" id="studentName" placeholder="Enter Student Name" />
+
+    <input type="text" id="bookName" placeholder="Enter Book Name" />
+
+    <input type="date" id="issueDate" />
+
+    <button onclick="issueBook()">Issue Book</button>
+
+    <hr style="margin-top:40px; margin-bottom:30px;" />
+
+    <h2>Issued Books List</h2>
+
+    <table class="issue-table">
+
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Book Name</th>
+                <th>Issue Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="issueTableBody">
+
+            <tr>
+                <td>Rahul Kumar</td>
+                <td>Python Programming</td>
+                <td>05-05-2026</td>
+                <td>Issued</td>
+                <td>
+                    <button onclick="returnBook(this)">
+                        Return
+                    </button>
+                </td>
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<footer>
+    <p>Library Management System | BCA Semester 5 Project</p>
+</footer>
+
+<script>
+
+    function issueBook() {
+
+        let student =
+            document.getElementById("studentName").value;
+
+        let book =
+            document.getElementById("bookName").value;
+
+        let date =
+            document.getElementById("issueDate").value;
+
+        if(student == "" || book == "" || date == "") {
+
+            alert("Please fill all fields");
+
+            return;
+        }
+
+        let table =
+            document.getElementById("issueTableBody");
+
+        let row = table.insertRow();
+
+        row.innerHTML = `
+            <td>${student}</td>
+            <td>${book}</td>
+            <td>${date}</td>
+            <td>Issued</td>
+
+            <td>
+                <button onclick="returnBook(this)">
+                    Return
+                </button>
+            </td>
+        `;
+
+        document.getElementById("studentName").value = "";
+        document.getElementById("bookName").value = "";
+        document.getElementById("issueDate").value = "";
+    }
+
+    function returnBook(button) {
+
+        let row =
+            button.parentElement.parentElement;
+
+        row.cells[3].innerHTML = "Returned";
+
+        button.innerHTML = "Returned";
+
+        button.disabled = true;
+    }
+
+</script>
